@@ -1,0 +1,138 @@
+---
+title: Introduction
+description: Overview of hypr documentation platform and its core capabilities
+---
+
+## Welcome to hypr Documentation
+
+Hypr provides a powerful documentation platform where you can organize and manage all your project documentation in one centralized space. Whether you're building APIs, creating guides, or maintaining technical knowledge bases, hypr streamlines the process of creating, sharing, and collaborating on documentation.
+
+<Columns cols={3}>
+  <Card title="Quick Start" icon="zap" href="#quick-start">
+    Get up and running in minutes with our guided setup.
+  </Card>
+  <Card title="API Integration" icon="code" href="#api-integration">
+    Connect your tools and automate documentation workflows.
+  </Card>
+  <Card title="Team Collaboration" icon="users" href="#collaboration">
+    Work together seamlessly across your organization.
+  </Card>
+</Columns>
+
+## Key Features
+
+<Tabs>
+  <Tab title="Organization" icon="folder">
+    <Steps>
+      <Step title="Create Spaces" icon="plus">
+        Set up dedicated documentation spaces for each project or team.
+      </Step>
+      <Step title="Organize Content" icon="layout">
+        Use categories, tags, and folders to keep your documentation structured.
+      </Step>
+      <Step title="Version Control" icon="git-branch">
+        Track changes and maintain version history for all your docs.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="Collaboration" icon="users">
+    <ExpandableGroup>
+      <Expandable title="Real-time Editing" default-open="true">
+        Multiple team members can edit documents simultaneously with live updates.
+      </Expandable>
+      <Expandable title="Review Workflows" default-open="false">
+        Submit changes for review and approval before publishing.
+      </Expandable>
+      <Expandable title="Access Controls" default-open="false">
+        Set permissions for viewing, editing, and managing documentation.
+      </Expandable>
+    </ExpandableGroup>
+  </Tab>
+</Tabs>
+
+## Getting Started
+
+<CodeGroup tabs="CLI,API">
+  ````bash
+  # Install hypr CLI
+  npm install -g @hypr/cli
+  
+  # Initialize a new documentation space
+  hypr init my-docs
+  
+  # Start the development server
+  hypr dev
+  ````
+  ````javascript
+  // Initialize hypr client
+  const hypr = require('@hypr/sdk');
+  
+  const client = new hypr.Client({
+    apiKey: 'your-api-key',
+    spaceId: 'your-space-id'
+  });
+  
+  // Create a new document
+  await client.documents.create({
+    title: 'Getting Started Guide',
+    content: '# Welcome to hypr'
+  });
+  ````
+</CodeGroup>
+
+<Callout kind="info">
+  Before you begin, make sure you have Node.js version 14 or higher installed on your system.
+</Callout>
+
+## Integration Options
+
+Hypr supports seamless integration with your existing development workflow. Connect with GitHub for automatic documentation updates, use webhooks to trigger builds, or integrate with CI/CD pipelines for automated publishing.
+
+<Expandable title="Supported Integrations" default-open="false">
+  - GitHub repositories for source control
+  - Slack notifications for team updates
+  - Jira integration for issue tracking
+  - Custom webhooks for automation
+  - API endpoints for programmatic access
+</Expandable>
+
+## Best Practices
+
+<Steps>
+  <Step title="Structure Your Content" icon="folder">
+    Organize your documentation with clear categories and consistent naming conventions.
+  </Step>
+  <Step title="Use Templates" icon="file-text">
+    Create reusable templates for common document types like API references or guides.
+  </Step>
+  <Step title="Review Regularly" icon="eye">
+    Schedule periodic reviews to keep documentation current and accurate.
+  </Step>
+  <Step title="Collaborate Effectively" icon="users">
+    Use comments and suggestions to gather feedback from team members.
+  </Step>
+</Steps>
+
+## Support and Resources
+
+Need help getting started? Check out our comprehensive documentation resources, join our community forums, or contact our support team.
+
+<Callout kind="tip">
+  Join our Discord community for real-time help and discussions with other hypr users.
+</Callout>
+
+<Update label="2024-10-15" description="v2.1.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added real-time collaborative editing capabilities
+- Introduced document templates for faster content creation
+- Enhanced search functionality with advanced filters
+
+## Improvements
+
+- Improved performance for large documentation spaces
+- Better mobile responsiveness across all devices
+- Updated user interface with modern design elements
+
+</Update>

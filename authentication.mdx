@@ -1,0 +1,139 @@
+---
+title: Authentication
+description: Learn how to authenticate and secure access to your hypr documentation spaces
+---
+
+## Authentication Overview
+
+Hypr uses a secure authentication system to protect your documentation spaces and control access to sensitive content. You can authenticate using API keys, OAuth tokens, or integrate with your organization's identity provider for single sign-on capabilities.
+
+<Tabs>
+  <Tab title="API Keys" icon="key">
+    <Steps>
+      <Step title="Generate API Key" icon="plus">
+        Navigate to your account settings and create a new API key.
+      </Step>
+      <Step title="Set Permissions" icon="shield">
+        Choose the appropriate permissions for the key based on your needs.
+      </Step>
+      <Step title="Use in Requests" icon="send">
+        Include the API key in your request headers for authentication.
+      </Step>
+    </Steps>
+  </Tab>
+  <Tab title="OAuth" icon="lock">
+    <CodeGroup tabs="JavaScript,Python">
+      ````javascript
+      // Initialize OAuth flow
+      const oauth = new hypr.OAuth({
+        clientId: 'your-client-id',
+        redirectUri: 'https://your-app.com/callback'
+      });
+      
+      // Start authentication
+      const authUrl = oauth.getAuthUrl();
+      window.location.href = authUrl;
+      ````
+      ````python
+      from hypr import OAuth
+      
+      oauth = OAuth(
+          client_id='your-client-id',
+          redirect_uri='https://your-app.com/callback'
+      )
+      
+      # Get authorization URL
+      auth_url = oauth.get_auth_url()
+      print(f"Visit: {auth_url}")
+      ````
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+## API Key Authentication
+
+API keys provide a simple way to authenticate requests to the hypr API. You can generate keys with different permission levels to control what actions they can perform.
+
+<Callout kind="info">
+  Always store your API keys securely and never commit them to version control.
+</Callout>
+
+<Expandable title="API Key Permissions" default-open="false">
+  | Permission | Description |
+  |------------|-------------|
+  | `read` | View documents and spaces |
+  | `write` | Create and edit documents |
+  | `admin` | Manage spaces and users |
+  | `delete` | Remove documents and spaces |
+</Expandable>
+
+## OAuth Integration
+
+For more advanced authentication scenarios, hypr supports OAuth 2.0 integration. This allows you to use existing identity providers like Google, GitHub, or your company's SSO system.
+
+<Steps>
+  <Step title="Configure Provider" icon="settings">
+    Set up your OAuth provider in the hypr dashboard.
+  </Step>
+  <Step title="Register Application" icon="plus">
+    Register your application with the OAuth provider.
+  </Step>
+  <Step title="Implement Flow" icon="code">
+    Handle the OAuth callback in your application.
+  </Step>
+  <Step title="Test Integration" icon="check">
+    Verify that authentication works correctly.
+  </Step>
+</Steps>
+
+## Security Best Practices
+
+<ExpandableGroup>
+  <Expandable title="Key Rotation" default-open="true">
+    Regularly rotate your API keys to minimize security risks.
+  </Expandable>
+  <Expandable title="Rate Limiting" default-open="false">
+    Implement rate limiting to prevent abuse of your API endpoints.
+  </Expandable>
+  <Expandable title="Audit Logs" default-open="false">
+    Monitor authentication attempts and access patterns.
+  </Expandable>
+</ExpandableGroup>
+
+## Troubleshooting Authentication
+
+<Callout kind="alert">
+  If you're experiencing authentication issues, first check that your API key is valid and has the correct permissions.
+</Callout>
+
+<Steps>
+  <Step title="Verify API Key" icon="check-circle">
+    Ensure your API key is active and not expired.
+  </Step>
+  <Step title="Check Permissions" icon="shield">
+    Confirm the key has the necessary permissions for your operation.
+  </Step>
+  <Step title="Review Headers" icon="file-text">
+    Make sure you're sending the correct authentication headers.
+  </Step>
+  <Step title="Contact Support" icon="message-circle">
+    If issues persist, reach out to our support team.
+  </Step>
+</Steps>
+
+## Single Sign-On (SSO)
+
+Hypr supports SAML-based SSO integration for enterprise customers. This allows users to authenticate using their corporate credentials without needing separate hypr accounts.
+
+<CodeGroup tabs="SAML Configuration">
+  ````xml
+  <!-- Example SAML metadata -->
+  <EntityDescriptor entityID="https://your-company.com/saml/metadata">
+    <SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol">
+      <AssertionConsumerService index="0" isDefault="true"
+        Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+        Location="https://your-app.hypr.com/saml/acs" />
+    </SPSSODescriptor>
+  </EntityDescriptor>
+  ````
+</CodeGroup>

@@ -1,0 +1,157 @@
+---
+title: Integrations
+description: Connect hypr with your favorite tools and automate your documentation workflow
+---
+
+## Integration Overview
+
+Hypr integrates seamlessly with popular development tools and platforms to streamline your documentation workflow. From version control systems to communication tools, you can connect everything in one place.
+
+<Columns cols={3}>
+  <Card title="GitHub" icon="github" href="#github">
+    Sync documentation with your repositories.
+  </Card>
+  <Card title="Slack" icon="message-square" href="#slack">
+    Get notifications about documentation updates.
+  </Card>
+  <Card title="Jira" icon="check-square" href="#jira">
+    Link documentation to project issues.
+  </Card>
+</Columns>
+
+## GitHub Integration
+
+<Steps>
+  <Step title="Connect Repository" icon="git-branch">
+    Link your GitHub repository to a hypr documentation space.
+  </Step>
+  <Step title="Configure Sync" icon="refresh-cw">
+    Set up automatic synchronization of documentation files.
+  </Step>
+  <Step title="Map Branches" icon="git-branch">
+    Associate repository branches with documentation versions.
+  </Step>
+</Steps>
+
+<CodeGroup tabs="GitHub Actions">
+  ````yaml
+  name: Sync Documentation
+  on:
+    push:
+      paths:
+        - 'docs/**'
+  jobs:
+    sync:
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@v2
+        - name: Sync to hypr
+          uses: hypr/github-action@v1
+          with:
+            api-key: ${{ secrets.HYPR_API_KEY }}
+            space-id: ${{ secrets.HYPR_SPACE_ID }}
+  ````
+</CodeGroup>
+
+<Callout kind="info">
+  GitHub integration supports both push and pull synchronization, keeping your documentation in sync with your code.
+</Callout>
+
+## Slack Integration
+
+<Tabs>
+  <Tab title="Notifications" icon="bell">
+    <Expandable title="Document Updates" default-open="true">
+      Receive notifications when documents are created, updated, or published.
+    </Expandable>
+    <Expandable title="Review Requests" default-open="false">
+      Get notified when your review is requested on documentation changes.
+    </Expandable>
+  </Tab>
+  <Tab title="Commands" icon="terminal">
+    <CodeGroup tabs="Slack Commands">
+      ````bash
+      # Search documentation
+      /hypr search "authentication"
+      
+      # Create new document
+      /hypr create "API Guide" --space engineering
+      
+      # Get document link
+      /hypr link "Getting Started"
+      ````
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+## Jira Integration
+
+<Steps>
+  <Step title="Connect Jira" icon="check-square">
+    Authorize hypr to access your Jira instance.
+  </Step>
+  <Step title="Map Projects" icon="folder">
+    Associate Jira projects with documentation spaces.
+  </Step>
+  <Step title="Link Issues" icon="link">
+    Automatically link documentation to related Jira issues.
+  </Step>
+</Steps>
+
+<Expandable title="Issue Linking" default-open="false">
+  | Jira Field | hypr Mapping |
+  |-------------|--------------|
+  | Issue Key | Document reference |
+  | Description | Related documentation |
+  | Comments | Documentation updates |
+</Expandable>
+
+## Webhook Integration
+
+<CodeGroup tabs="Webhook Example">
+  ````json
+  {
+    "event": "document.published",
+    "spaceId": "space_123",
+    "documentId": "doc_456",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "data": {
+      "title": "API Reference",
+      "author": "john.doe@company.com",
+      "url": "https://hypr.com/docs/api-reference"
+    }
+  }
+  ````
+</CodeGroup>
+
+<ExpandableGroup>
+  <Expandable title="Supported Events" default-open="true">
+    - `document.created`
+    - `document.updated`
+    - `document.published`
+    - `document.deleted`
+    - `space.created`
+    - `user.invited`
+  </Expandable>
+  <Expandable title="Security" default-open="false">
+    All webhooks include HMAC signatures for verification.
+  </Expandable>
+</ExpandableGroup>
+
+## Custom Integrations
+
+<Steps>
+  <Step title="API Access" icon="code">
+    Use the hypr REST API to build custom integrations.
+  </Step>
+  <Step title="SDK Libraries" icon="package">
+    Leverage official SDKs for popular programming languages.
+  </Step>
+  <Step title="Documentation" icon="book-open">
+    Refer to the API documentation for endpoint details.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Check our integrations marketplace for pre-built connectors to popular tools.
+</Callout>

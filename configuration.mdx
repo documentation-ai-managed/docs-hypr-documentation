@@ -1,0 +1,152 @@
+---
+title: Configuration
+description: Comprehensive guide to configuring your hypr documentation spaces and settings
+---
+
+## Configuration Overview
+
+Hypr offers extensive configuration options to customize your documentation experience. From space settings to user preferences, you can tailor the platform to fit your team's workflow and organizational needs.
+
+<Columns cols={2}>
+  <Card title="Space Settings" icon="settings" href="#space-settings">
+    Configure your documentation spaces and access controls.
+  </Card>
+  <Card title="User Preferences" icon="user" href="#user-preferences">
+    Personalize your hypr experience.
+  </Card>
+</Columns>
+
+## Space Configuration
+
+<Steps>
+  <Step title="Create Space" icon="plus">
+    Start by creating a new documentation space in your dashboard.
+  </Step>
+  <Step title="Set Visibility" icon="eye">
+    Choose whether the space is public, private, or team-only.
+  </Step>
+  <Step title="Configure Permissions" icon="shield">
+    Define roles and permissions for team members.
+  </Step>
+  <Step title="Customize Branding" icon="palette">
+    Add your logo and brand colors to the space.
+  </Step>
+</Steps>
+
+## Advanced Settings
+
+<Tabs>
+  <Tab title="Webhooks" icon="webhook">
+    <CodeGroup tabs="Webhook Setup">
+      ````json
+      {
+        "url": "https://your-app.com/webhook",
+        "events": ["document.created", "document.updated"],
+        "secret": "your-webhook-secret"
+      }
+      ````
+    </CodeGroup>
+  </Tab>
+  <Tab title="Integrations" icon="plug">
+    <Expandable title="GitHub Integration" default-open="true">
+      Connect your GitHub repositories to automatically sync documentation changes.
+    </Expandable>
+    <Expandable title="Slack Integration" default-open="false">
+      Receive notifications about documentation updates in Slack.
+    </Expandable>
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">
+  Use webhooks to trigger automated workflows when documents are updated or published.
+</Callout>
+
+## User Preferences
+
+<ExpandableGroup>
+  <Expandable title="Notification Settings" default-open="true">
+    Configure email and in-app notifications for document changes and mentions.
+  </Expandable>
+  <Expandable title="Editor Preferences" default-open="false">
+    Customize your writing experience with themes, fonts, and keyboard shortcuts.
+  </Expandable>
+  <Expandable title="Language Settings" default-open="false">
+    Set your preferred language and regional formatting options.
+  </Expandable>
+</ExpandableGroup>
+
+## API Configuration
+
+<Steps>
+  <Step title="Generate API Keys" icon="key">
+    Create API keys with appropriate permissions.
+  </Step>
+  <Step title="Configure Endpoints" icon="link">
+    Set up custom API endpoints if needed.
+  </Step>
+  <Step title="Test Connections" icon="check-circle">
+    Verify your API configuration works correctly.
+  </Step>
+</Steps>
+
+<CodeGroup tabs="JavaScript,Python,cURL">
+  ````javascript
+  const hypr = require('@hypr/sdk');
+  
+  const client = new hypr.Client({
+    apiKey: process.env.HYPR_API_KEY,
+    baseUrl: 'https://api.hypr.com/v1'
+  });
+  
+  // Test connection
+  client.spaces.list().then(spaces => {
+    console.log('Connected successfully');
+  });
+  ````
+  ````python
+  import os
+  from hypr import Client
+  
+  client = Client(
+      api_key=os.getenv('HYPR_API_KEY'),
+      base_url='https://api.hypr.com/v1'
+  )
+  
+  # Test connection
+  spaces = client.spaces.list()
+  print('Connected successfully')
+  ````
+  ````bash
+  curl -H "Authorization: Bearer $HYPR_API_KEY" \
+       -H "Content-Type: application/json" \
+       https://api.hypr.com/v1/spaces
+  ````
+</CodeGroup>
+
+## Environment Variables
+
+<Expandable title="Required Environment Variables" default-open="false">
+  | Variable | Description | Required |
+  |----------|-------------|----------|
+  | `HYPR_API_KEY` | Your API key for authentication | Yes |
+  | `HYPR_BASE_URL` | API base URL | No |
+  | `HYPR_SPACE_ID` | Default space ID | No |
+</Expandable>
+
+<Callout kind="alert">
+  Never commit sensitive configuration values like API keys to version control.
+</Callout>
+
+## Backup and Recovery
+
+<Steps>
+  <Step title="Enable Backups" icon="download">
+    Configure automatic backups of your documentation.
+  </Step>
+  <Step title="Set Retention Policy" icon="clock">
+    Define how long to keep backup versions.
+  </Step>
+  <Step title="Test Restore" icon="refresh-cw">
+    Regularly test your backup and restore procedures.
+  </Step>
+</Steps>
